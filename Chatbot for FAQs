@@ -1,0 +1,120 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyOt6Tx2bAPqU0mOiNqX1Xbx",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Snehaverma0909/codealpha/blob/main/Chatbot%20for%20FAQs\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [],
+      "metadata": {
+        "id": "jwPn9gFQ7V1F"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Sample FAQ data (questions and answers)\n",
+        "faq_data = {\n",
+        "    \"What is your name?\": \"I am an AI-powered chatbot designed to help you.\",\n",
+        "    \"What is Python?\": \"Python is a high-level programming language used for various purposes like web development, data analysis, AI, and more.\",\n",
+        "    \"How can I help you?\": \"You can ask me about common programming languages, concepts, or just general FAQs.\",\n",
+        "    \"What is Artificial Intelligence (AI)?\": \"AI is the simulation of human intelligence processes by machines, especially computer systems.\",\n",
+        "    \"What is Machine Learning?\": \"Machine learning is a branch of AI where systems learn from data and improve over time without explicit programming.\",\n",
+        "    \"What is your purpose?\": \"My purpose is to assist you in answering your questions based on the FAQ data I have.\",\n",
+        "    \"How do I start learning programming?\": \"You can start with languages like Python, which is beginner-friendly. There are plenty of free resources online to help you.\",\n",
+        "    \"What is JavaScript used for?\": \"JavaScript is used for creating dynamic and interactive effects on websites.\",\n",
+        "    \"What is Git?\": \"Git is a version control system used for tracking changes in source code during software development.\",\n",
+        "    \"How do I contact support?\": \"You can reach support through the contact section on the website.\"\n",
+        "}\n",
+        "\n",
+        "# Function to get the answer from FAQ dictionary\n",
+        "def get_answer(question):\n",
+        "    answer = faq_data.get(question, \"Sorry, I don't have an answer for that question. Please try asking something else.\")  # Get answer from the dictionary or a default message\n",
+        "    return answer\n",
+        "\n",
+        "# Chatbot loop to interact with user\n",
+        "print(\"Welcome to the FAQ Chatbot!\")\n",
+        "print(\"Ask any of the following questions:\")\n",
+        "print(\"- What is your name?\")\n",
+        "print(\"- What is Python?\")\n",
+        "print(\"- How can I help you?\")\n",
+        "print(\"- What is Artificial Intelligence (AI)?\")\n",
+        "print(\"- What is Machine Learning?\")\n",
+        "print(\"- What is your purpose?\")\n",
+        "print(\"- How do I start learning programming?\")\n",
+        "print(\"- What is JavaScript used for?\")\n",
+        "print(\"- What is Git?\")\n",
+        "print(\"- How do I contact support?\")\n",
+        "print(\"\\nType 'exit' to end the conversation.\")\n",
+        "\n",
+        "while True:\n",
+        "    # Ask user to input a question\n",
+        "    user_input = input(\"You: \")\n",
+        "\n",
+        "    # Exit condition\n",
+        "    if user_input.lower() == \"exit\":\n",
+        "        print(\"Goodbye! Have a great day!\")\n",
+        "        break\n",
+        "\n",
+        "    # Get the answer for the user's question\n",
+        "    response = get_answer(user_input)\n",
+        "\n",
+        "    # Print chatbot's response\n",
+        "    print(\"Chatbot: \" + response)\n"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "8193hUlo7Wc1",
+        "outputId": "d07ebf22-cefb-40cf-cde3-eee91e89985c"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Welcome to the FAQ Chatbot!\n",
+            "Ask any of the following questions:\n",
+            "- What is your name?\n",
+            "- What is Python?\n",
+            "- How can I help you?\n",
+            "- What is Artificial Intelligence (AI)?\n",
+            "- What is Machine Learning?\n",
+            "- What is your purpose?\n",
+            "- How do I start learning programming?\n",
+            "- What is JavaScript used for?\n",
+            "- What is Git?\n",
+            "- How do I contact support?\n",
+            "\n",
+            "Type 'exit' to end the conversation.\n"
+          ]
+        }
+      ]
+    }
+  ]
+}
