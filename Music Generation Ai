@@ -1,0 +1,120 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "authorship_tag": "ABX9TyMNAbd/8mkuyIDs5y/6EG22",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Snehaverma0909/CODSOFT/blob/main/Music%20Generation%20Ai\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "vfBadv1jumSp",
+        "outputId": "47b00b8a-67bf-43b0-dbee-0728c748b1f4"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "✅ Music Saved: generated_music.mid\n"
+          ]
+        },
+        {
+          "output_type": "stream",
+          "name": "stderr",
+          "text": [
+            "/usr/local/lib/python3.11/dist-packages/keras/src/layers/rnn/rnn.py:200: UserWarning: Do not pass an `input_shape`/`input_dim` argument to a layer. When using Sequential models, prefer using an `Input(shape)` object as the first layer in the model instead.\n",
+            "  super().__init__(**kwargs)\n"
+          ]
+        }
+      ],
+      "source": [
+        "import numpy as np\n",
+        "import tensorflow as tf\n",
+        "from tensorflow import keras\n",
+        "from music21 import instrument, note, stream\n",
+        "import matplotlib.pyplot as plt\n",
+        "\n",
+        "# 🎵 Sample MIDI Notes\n",
+        "notes = [\"C4\", \"D4\", \"E4\", \"F4\", \"G4\", \"A4\", \"B4\", \"C5\"]\n",
+        "note_to_int = {note: num for num, note in enumerate(notes)}\n",
+        "int_to_note = {num: note for num, note in enumerate(notes)}\n",
+        "\n",
+        "# 🔥 AI Model Define करें\n",
+        "model = keras.Sequential([\n",
+        "    keras.layers.LSTM(128, return_sequences=True, input_shape=(None, 1)),\n",
+        "    keras.layers.LSTM(128),\n",
+        "    keras.layers.Dense(128, activation='relu'),\n",
+        "    keras.layers.Dense(len(notes), activation='softmax')\n",
+        "])\n",
+        "\n",
+        "model.compile(loss='categorical_crossentropy', optimizer='adam')\n",
+        "\n",
+        "# 🎶 Random Music Generate करें\n",
+        "def generate_music(length=50):\n",
+        "    output_notes = []\n",
+        "    start_note = np.random.randint(0, len(notes))\n",
+        "\n",
+        "    for _ in range(length):\n",
+        "        output_notes.append(int_to_note[start_note])\n",
+        "        start_note = np.random.randint(0, len(notes))\n",
+        "\n",
+        "    return output_notes\n",
+        "\n",
+        "# 🎼 MIDI File में सेव करें\n",
+        "def save_to_midi(output_notes, filename=\"generated_music.mid\"):\n",
+        "    midi_stream = stream.Stream()\n",
+        "\n",
+        "    for n in output_notes:\n",
+        "        new_note = note.Note(n)\n",
+        "        new_note.duration.quarterLength = 0.5\n",
+        "        new_note.storedInstrument = instrument.Piano()\n",
+        "        midi_stream.append(new_note)\n",
+        "\n",
+        "    midi_stream.write('midi', fp=filename)\n",
+        "    print(f\"✅ Music Saved: {filename}\")\n",
+        "\n",
+        "# 🎶 Music Generate करें और Save करें\n",
+        "generated_notes = generate_music()\n",
+        "save_to_midi(generated_notes)\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "from google.colab import drive\n",
+        "drive.mount('/content/drive')"
+      ],
+      "metadata": {
+        "id": "mDyNkmagtx1J"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
